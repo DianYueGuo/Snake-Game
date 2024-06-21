@@ -37,7 +37,7 @@ class __Neuron:
     def potential_value(self) -> float:
         return self.__potential_value
 
-class __NeuralNetwork:
+class NeuralNetwork:
     def __init__(self, n_input_neurons, n_output_neurons):
         self.__n_input_neurons = n_input_neurons
         self.__n_output_neurons = n_output_neurons
