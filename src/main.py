@@ -15,6 +15,8 @@ def convert_number_into_grayscale_color(number: float):
     return pygame.Color(color_value, color_value, color_value)
 
 def draw(window, game_screen: np.ndarray):
+    LINE_WIDTH_TO_BLOCK_WIDTH_RATIO = 0.05
+    
     # Check if game_screen is a NumPy array
     if not isinstance(game_screen, np.ndarray):
         raise TypeError("game_screen must be a NumPy array")
@@ -27,7 +29,18 @@ def draw(window, game_screen: np.ndarray):
     if game_screen.shape[0] == 0 or game_screen.shape[1] == 0:
         raise ValueError("game_screen must have non-zero dimensions")
 
-    pygame.draw.rect(window, convert_number_into_grayscale_color(0.5), (50, 50, 200, 100))
+    block_width = min(window.get_width() / (LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * game_screen.shape[0]),
+                    window.get_height() / (LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * game_screen.shape[1]))
+
+    start_printing_point_x = window.get_width() / 2 - block_width * (LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * game_screen.shape[0]) / 2
+    start_printing_point_y = window.get_height() / 2 - block_width * (LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * game_screen.shape[1]) / 2
+
+    for i, row in enumerate(game_screen):
+        for j, number in enumerate(row):
+            pygame.draw.rect(window, convert_number_into_grayscale_color(number), 
+                             (start_printing_point_x + block_width * LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + block_width * (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * i,
+                              start_printing_point_y + block_width * LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + block_width * (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * j,
+                              block_width, block_width))
 
 def main():
     # Initialize Pygame
