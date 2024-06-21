@@ -48,7 +48,7 @@ def __main():
 
     # Set up display
     window_size = (800, 600)
-    window = pygame.display.set_mode(window_size)
+    window = pygame.display.set_mode(window_size, pygame.RESIZABLE)
     pygame.display.set_caption('My Pygame Window')
 
     # Set up the clock for managing the frame rate
