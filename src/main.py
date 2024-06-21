@@ -1,5 +1,6 @@
 import pygame
 import sys
+import numpy as np
 
 def convert_number_into_grayscale_color(number: float):
     NUMBER_UPPER_BOUND = 1.0
@@ -13,7 +14,19 @@ def convert_number_into_grayscale_color(number: float):
 
     return pygame.Color(color_value, color_value, color_value)
 
-def draw(window):
+def draw(window, game_screen: np.ndarray):
+    # Check if game_screen is a NumPy array
+    if not isinstance(game_screen, np.ndarray):
+        raise TypeError("game_screen must be a NumPy array")
+
+    # Check if game_screen has two dimensions
+    if game_screen.ndim != 2:
+        raise ValueError("game_screen must have two dimensions")
+    
+    # Check if game_screen has non-zero dimensions
+    if game_screen.shape[0] == 0 or game_screen.shape[1] == 0:
+        raise ValueError("game_screen must have non-zero dimensions")
+
     pygame.draw.rect(window, convert_number_into_grayscale_color(0.5), (50, 50, 200, 100))
 
 def main():
@@ -39,7 +52,7 @@ def main():
         window.fill((0, 0, 0))  # Black background
 
         # Draw the window
-        draw(window)
+        draw(window, np.ones((2, 5)))
 
         # Update the display
         pygame.display.flip()
