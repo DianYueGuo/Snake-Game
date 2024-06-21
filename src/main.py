@@ -2,7 +2,7 @@ import pygame
 import sys
 import numpy as np
 
-def convert_number_into_grayscale_color(number: float):
+def __convert_number_into_grayscale_color(number: float):
     NUMBER_UPPER_BOUND = 1.0
     NUMBER_LOWER_BOUND = 0.0
 
@@ -14,7 +14,7 @@ def convert_number_into_grayscale_color(number: float):
 
     return pygame.Color(color_value, color_value, color_value)
 
-def draw(window, game_screen: np.ndarray):
+def __draw(window, game_screen: np.ndarray):
     LINE_WIDTH_TO_BLOCK_WIDTH_RATIO = 0.05
     
     # Check if game_screen is a NumPy array
@@ -37,12 +37,12 @@ def draw(window, game_screen: np.ndarray):
 
     for i, row in enumerate(game_screen):
         for j, number in enumerate(row):
-            pygame.draw.rect(window, convert_number_into_grayscale_color(number), 
+            pygame.draw.rect(window, __convert_number_into_grayscale_color(number), 
                              (start_printing_point_x + block_width * LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + block_width * (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * i,
                               start_printing_point_y + block_width * LINE_WIDTH_TO_BLOCK_WIDTH_RATIO + block_width * (1 + LINE_WIDTH_TO_BLOCK_WIDTH_RATIO) * j,
                               block_width, block_width))
 
-def main():
+def __main():
     # Initialize Pygame
     pygame.init()
 
@@ -65,7 +65,7 @@ def main():
         window.fill((0, 0, 0))  # Black background
 
         # Draw the window
-        draw(window, np.ones((2, 5)))
+        __draw(window, np.ones((2, 5)))
 
         # Update the display
         pygame.display.flip()
@@ -78,4 +78,4 @@ def main():
     sys.exit()
 
 if __name__ == '__main__':
-    main()
+    __main()
