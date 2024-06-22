@@ -20,8 +20,11 @@ class __Neuron:
         self.__dendrites = []
 
     @staticmethod
-    def __logistic(x: float) -> float:
-        return 1 / (1 + math.exp(-x))
+    def __ReLU(x: float) -> float:
+        if x > 0:
+            return x
+        else:
+            return 0
 
     def react_to_input_signals(self) -> float:
         signal_sum = self.__bias
@@ -29,7 +32,7 @@ class __Neuron:
         for dendrite in self.__dendrites:
             signal_sum += dendrite.get_signal()
 
-        self.__potential_value = __Neuron.__logistic(signal_sum)
+        self.__potential_value = __Neuron.__ReLU(signal_sum)
 
         return self.__potential_value
     
