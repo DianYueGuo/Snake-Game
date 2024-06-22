@@ -29,13 +29,13 @@ class __Neuron:
 
         return self.__potential_value
     
-    @potential_value.setter
-    def potential_value(self, potential_value: float):
-        self.__potential_value = potential_value
-
     @property
     def potential_value(self) -> float:
         return self.__potential_value
+
+    @potential_value.setter
+    def potential_value(self, potential_value: float):
+        self.__potential_value = potential_value
 
 class NeuralNetwork:
     def __init__(self, n_input_neurons, n_output_neurons):
