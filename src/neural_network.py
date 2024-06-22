@@ -60,7 +60,7 @@ class NeuralNetwork:
         for i, input_value in enumerate(input_values):
             self.__input_neurons[i].potential_value = input_value
 
-    def get_output_values(self) -> Tuple[float, ...]:
+    def compute_output_values(self) -> Tuple[float, ...]:
         for node in self.__hidden_neurons:
             node.react_to_input_signals()
 
