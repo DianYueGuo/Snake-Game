@@ -15,7 +15,7 @@ class __Neuron:
         self.__bias = bias
         self.__dendrites = []
 
-    @classmethod
+    @staticmethod
     def __logistic(x: float) -> float:
         return 1 / (1 + math.exp(-x))
 
@@ -25,7 +25,7 @@ class __Neuron:
         for dendrite in self.__dendrites:
             signal_sum += dendrite.get_signal()
 
-        self.__potential_value = self.__logistic(signal_sum)
+        self.__potential_value = __Neuron.__logistic(signal_sum)
 
         return self.__potential_value
     
