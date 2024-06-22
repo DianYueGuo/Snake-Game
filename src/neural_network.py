@@ -31,7 +31,7 @@ class __Neuron:
     
     @potential_value.setter
     def potential_value(self, potential_value: float):
-        self.potential_value = potential_value
+        self.__potential_value = potential_value
 
     @property
     def potential_value(self) -> float:
