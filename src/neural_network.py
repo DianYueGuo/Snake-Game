@@ -2,6 +2,8 @@ import math
 from typing import Tuple
 
 class __Dendrite:
+    __slots__ = ('__input_neuron', '__weight')
+
     def __init__(self, input_neuron: __Neuron, weight: float):
         self.__input_neuron = input_neuron
         self.__weight = weight
@@ -10,6 +12,8 @@ class __Dendrite:
         return self.__input_neuron.potential_value * self.__weight
 
 class __Neuron:
+    __slots__ = ('__potential_value', '__bias', '__dendrites')
+
     def __init__(self, potential_value: float, bias: float):
         self.__potential_value = potential_value
         self.__bias = bias
@@ -38,6 +42,8 @@ class __Neuron:
         self.__potential_value = potential_value
 
 class NeuralNetwork:
+    __slots__ = ('__n_input_neurons', '__n_output_neurons', '__input_neurons', '__output_neurons', '__hidden_neurons')
+
     def __init__(self, n_input_neurons, n_output_neurons):
         self.__n_input_neurons = n_input_neurons
         self.__n_output_neurons = n_output_neurons
