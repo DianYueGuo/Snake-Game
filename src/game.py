@@ -1,7 +1,7 @@
 class Game:
-    def __init__(self, width=50, height=50):
-        self.__width = width
-        self.__height = height
+    def __init__(self, n_blocks_horizontally=50, n_blocks_vertically=50):
+        self.__n_blocks_horizontally = n_blocks_horizontally
+        self.__n_blocks_vertically = n_blocks_vertically
 
         pass
 
