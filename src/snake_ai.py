@@ -4,7 +4,7 @@ from typing import Union, Sequence
 
 from neural_network import NeuralNetwork
 
-class Snake:
+class Snake_ai:
     __MEMORY_SIZE = 6
 
     class Direction(Enum):
