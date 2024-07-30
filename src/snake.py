@@ -1,7 +1,8 @@
-from neural_network import NeuralNetwork
 from enum import Enum, auto
 import numpy as np
 from typing import Union, Sequence
+
+from neural_network import NeuralNetwork
 
 class Snake:
     __MEMORY_SIZE = 6
