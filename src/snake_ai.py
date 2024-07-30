@@ -13,7 +13,7 @@ class Snake_ai:
         FORWARD = auto()
 
     def __init__(self):
-        self.__brain = NeuralNetwork(6 + Snake.__MEMORY_SIZE, 5 + Snake.__MEMORY_SIZE)
+        self.__brain = NeuralNetwork(6 + Snake_ai.__MEMORY_SIZE, 5 + Snake_ai.__MEMORY_SIZE)
         self.__memory = tuple([0] * self.__MEMORY_SIZE)
 
         # Perceptions
@@ -27,7 +27,7 @@ class Snake_ai:
         self.__front_obstacle_distance = 1
 
         # Actions
-        self.__move_direction = Snake.Direction.FORWARD
+        self.__move_direction = Snake_ai.Direction.FORWARD
         self.__body_color_grayscale = 0.5
         self.__is_reproduce = False
 
@@ -83,15 +83,15 @@ class Snake_ai:
     @staticmethod
     def __interpret_move_direction_output_values_with_randomness(
         move_left_value: float, move_right_value: float, move_forward_value: float) -> Direction:
-        softmax_result = Snake.__softmax((move_left_value, move_right_value, move_forward_value))
+        softmax_result = Snake_ai.__softmax((move_left_value, move_right_value, move_forward_value))
         random_value = np.random.uniform(0.0, 1.1)
 
         if random_value <= softmax_result[0]:
-            return Snake.Direction.LEFT
+            return Snake_ai.Direction.LEFT
         elif random_value <= softmax_result[0] + softmax_result[1]:
-            return Snake.Direction.RIGHT
+            return Snake_ai.Direction.RIGHT
         else:
-            return Snake.Direction.FORWARD
+            return Snake_ai.Direction.FORWARD
 
     @staticmethod
     def __interpret_is_reproduce_output_value_with_randomness(is_reproduce_value: float) -> bool:
@@ -110,10 +110,10 @@ class Snake_ai:
         
         output_action_values = self.__brain.compute_output_values()
 
-        self.__move_direction = Snake.__interpret_move_direction_output_values_with_randomness(output_action_values[0:3])
+        self.__move_direction = Snake_ai.__interpret_move_direction_output_values_with_randomness(output_action_values[0:3])
 
-        self.__body_color_grayscale = Snake.__softmax((output_action_values[3], 0))[0]
+        self.__body_color_grayscale = Snake_ai.__softmax((output_action_values[3], 0))[0]
 
-        self.__is_reproduce = Snake.__interpret_is_reproduce_output_value_with_randomness(output_action_values[4])
+        self.__is_reproduce = Snake_ai.__interpret_is_reproduce_output_value_with_randomness(output_action_values[4])
 
-        self.__memory = output_action_values[5 : 5 + Snake.__MEMORY_SIZE]
+        self.__memory = output_action_values[5 : 5 + Snake_ai.__MEMORY_SIZE]
